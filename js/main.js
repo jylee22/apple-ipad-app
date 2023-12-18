@@ -34,20 +34,6 @@ function hideBasket(){
   basketEl.classList.remove('show');
 }
 
-// 토글 버튼
-// const btnEl = document.querySelector('.btn_toggle');
-// const toggleContEl = document.querySelector('.toggle_content');
-
-// btnEl.addEventListener('click', function(){
-//   if(toggleContEl.classList.contains('show')){
-//     // hide
-//     toggleContEl.classList.remove('show');
-//   } else{
-//     // show
-//     toggleContEl.classList.add('show');
-//   }
-// });
-
 /* search */
 const headerEl = document.querySelector('header');
 const headerMenuEls = [...headerEl.querySelectorAll('.menu > li')] // ... 전계연산자 (배열)
@@ -59,12 +45,15 @@ const searchInputEl = searchWrapEl.querySelector('input');
 const searchDelayEls = [...searchWrapEl.querySelectorAll('li')]; // 배열 전환
 
 searchStarterEl.addEventListener('click', showSearch );
-searchCloseEl.addEventListener('click', hiedSearch );
+searchCloseEl.addEventListener('click', function(event){
+  event.stopPropagation();
+  hiedSearch();
+} );
 searchShadowEl.addEventListener('click', hiedSearch );
 
 function showSearch(){
   headerEl.classList.add('searching');
-  document.documentElement.classList.add('fixed'); // 문서의 최상위 속성 (html) 스크롤 바 고정
+  stopScroll();
   headerMenuEls.reverse().forEach(function (el, idx){ // 순서 뒤집기
     el.style.transitionDelay = idx * .4 / headerMenuEls.length + 's';
   }); 
@@ -82,7 +71,7 @@ function showSearch(){
 }
 function hiedSearch(){
   headerEl.classList.remove('searching');
-  document.documentElement.classList.remove('fixed'); // 문서의 최상위 속성 (html)
+  playScroll();
   headerMenuEls.reverse().forEach(function (el, idx){ // 순서 뒤집기
     el.style.transitionDelay = idx * .4 / headerMenuEls.length + 's';
   }); 
@@ -95,6 +84,75 @@ function hiedSearch(){
 
   // 검색창 내용 초기화
   searchInputEl.value = '';
+}
+
+function playScroll(){ // 스크롤 보이게
+  document.documentElement.classList.remove('fixed'); // 문서의 최상위 속성 (html)
+}
+
+function stopScroll(){ // 스크롤 안보이게
+  document.documentElement.classList.add('fixed'); // 문서의 최상위 속성 (html) 스크롤 바 고정
+}
+
+// header menu toggle
+const menuStarterEl = document.querySelector('header .menu-starter');
+menuStarterEl.addEventListener('click',function(){
+  if(headerEl.classList.contains('menuing')){
+    headerEl.classList.remove('menuing');
+    searchInputEl.value = ''; // 검색창 내용 초기화
+    playScroll();
+  } else{
+    headerEl.classList.add('menuing');
+    stopScroll();
+  }
+});
+
+// header search
+const searchTextFieldEl = document.querySelector('header .textfield');
+const searchCanceEl = document.querySelector('header .search-canceler');
+searchTextFieldEl.addEventListener('click', function(){
+  headerEl.classList.add('searching--mobile');
+  searchInputEl.focus();
+});
+searchCanceEl.addEventListener('click', function(){
+  headerEl.classList.remove('searching--mobile');
+});
+
+// 화면 조정 시 검색 영역
+window.addEventListener('resize', function(){
+  if(window.innerWidth <= 740){
+    headerEl.classList.remove('searching');
+  } else{
+    headerEl.classList.remove('searching--mobile');
+  }
+});
+
+
+// nav
+const navEl = document.querySelector('nav');
+const navMenuToggleEl = navEl.querySelector('.menu-toggler');
+const navMenuShadowEl = navEl.querySelector('.shadow');
+
+navMenuToggleEl.addEventListener('click', function(){
+  if(navEl.classList.contains('menuing')){
+    hideNavMenu()
+  } else{
+    showNavMenu();
+  }
+});
+
+navEl.addEventListener('click', function(event){
+  event.stopPropagation(); // 상위 개체까지 접근하지 않음
+});
+navMenuShadowEl.addEventListener('click', hideNavMenu);
+window.addEventListener('click', hideNavMenu);
+
+function showNavMenu(){
+  navEl.classList.add('menuing');
+}
+
+function hideNavMenu(){
+  navEl.classList.remove('menuing');
 }
 
 // 요소의 가시성 관찰
@@ -175,6 +233,7 @@ navigations.forEach(function(nav){
   mapEl.innerHTML = /* html */ `
     <h3>
       <span class="text">${nav.title}</span>
+      <span class="icon">+</span>
     </h3>
     <ul>
       ${mapList}
@@ -187,3 +246,12 @@ navigations.forEach(function(nav){
 // 년도 표시
 const thisYearEl = document.querySelector('span.this-year');
 thisYearEl.textContent = new Date().getFullYear();
+
+// footer acoodian
+const mapEls = document.querySelectorAll('footer .navigations .map');
+mapEls.forEach(function(el) {
+  const h3El = el.querySelector('h3');
+  h3El.addEventListener('click', function() {
+    el.classList.toggle('active');
+  });
+});

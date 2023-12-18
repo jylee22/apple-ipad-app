@@ -7,6 +7,7 @@ html{
   --color-black: #000000;
   --color-font: #1D1D1D;
   --color-font-darkgray: #6E6E6E;
+  --color-font-middlegray: #B7B7B7;
   --color-font-lightgray: #F5F5F5;
   --color-link: #0071E3;
   --color-link-focus: #81B9F1;
@@ -325,6 +326,7 @@ header{
   background-color: var(--color-header);
   position: relative;
   z-index: 9;
+  transition: .4s;
 }
 header .inner {
   max-width: 1020px;
@@ -343,6 +345,9 @@ header .menu > li{
   position: relative;
   transition: .4s ;
 }
+header .menu > .menu-starter{
+  display: none;
+}
 header .menu > li > a{
   padding: 0 10px;
   font-size: 11px;
@@ -355,6 +360,11 @@ header .menu > a:hover{
   opacity: 1;
 }
 
+header .clone-menu{
+  display: none;
+}
+
+/* search animation 지정 */
 header .menu .apple-logo a,
 header .menu .search-starter a,
 header .menu .basket-starter > a{
@@ -546,6 +556,7 @@ header.searching .search .autocompletes li{
 
 /* middle nav */
 nav{
+  --nav-height: 52px;
   background-color: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--color-border);
@@ -555,7 +566,7 @@ nav{
 }
 nav .inner{
   max-width: 1000px;
-  height: 52px;
+  height: var(--nav-height);
   display: flex;
   align-items: center;
 }
@@ -1279,6 +1290,9 @@ footer .navigations .map:nth-child(6){
 footer .navigations .map h3{
   font-size: 12px;
   font-weight: 600;
+}
+footer .navigations .map h3 .icon{
+  display: none;
 }
 footer .navigations li{
   margin-top: 12px;

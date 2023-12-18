@@ -24,6 +24,7 @@
   <!-- css -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
   <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/media.css">
 
   <!-- js -->
   <!-- <script src="./assets/data/ipads.js"></script>
@@ -36,6 +37,14 @@
   <header>
     <div class="inner">
       <ul class="menu">
+        <li class="menu-starter">
+          <a>
+            <div>
+              <span></span>
+              <span></span>
+            </div>
+          </a>
+        </li>
         <li class="apple-logo"><a href="javascript:void(0);">Apple</a></li>
         <li><a href="javascript:void(0);">스토어</a></li>
         <li><a href="javascript:void(0);">Mac</a></li>
@@ -72,6 +81,7 @@
             <div class="search-icon"></div>
             <div class="search-closer"></div>
           </div>
+          <div class="search-canceler">취소</div>
           <div class="autocompletes">
             <h3>빠른 링크</h3>
             <ul>
@@ -83,14 +93,31 @@
             </ul>
           </div>
         </div>
+
+        <div class="clone-menu">
+          <ul>
+            <li><a href="javascript:void(0);">스토어</a></li>
+            <li><a href="javascript:void(0);">Mac</a></li>
+            <li><a href="javascript:void(0);">iPad</a></li>
+            <li><a href="javascript:void(0);">iPhone</a></li>
+            <li><a href="javascript:void(0);">Watch</a></li>
+            <li><a href="javascript:void(0);">AirPods</a></li>
+            <li><a href="javascript:void(0);">Apple 독점 제공</a></li>
+            <li><a href="javascript:void(0);">악세서리</a></li>
+            <li><a href="javascript:void(0);">고객지원</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </header>
 
   <!-- nav -->
   <nav>
+    <div class="shadow"></div>
+    <div class="contents-bg"></div>
     <div class="inner">
       <h1>iPad</h1>
+      <div class="menu-toggler"></div>
       <ul class="menu">
         <li class="active"><a href="javascript:void(0)">개요</a></li>
         <li><a href="javascript:void(0)">iPad를 선택하는 이유</a></li>
@@ -551,7 +578,7 @@
           <p>케이스, 커버, Apple Pencil, AirPods 등 다양한 액세서리를 만나보세요.</p>
           <a href="javascript:void(0)" class="link">iPad 액세서리 쇼핑하기</a>
 
-          <img class="icon" src="./assets/images/ipad_accessories.jpg" alt="다양한 액새서리 이미지">
+          <img src="./assets/images/ipad_accessories.jpg" alt="다양한 액새서리 이미지">
         </div>
       </div>
     </section>
